@@ -18,29 +18,35 @@ export class App extends Component {
 
   handleAddContact = event => {
     event.preventDefault();
-    console.dir(event.target[1].value);
     const name = event.target[0].value;
     const number = event.target[1].value;
     this.setState(prevState => {
       return {
-        contacts: [...prevState.contacts, { name, number, id: nanoid() }]
+        contacts: [...prevState.contacts, { name, number, id: nanoid() }],
       };
-    }
-    );
+    });
+  };
 
-  handelFilter = ({ target }) => {
-    this.setState({ filter: target.value });
+  handelFilter = event => {
+    this.setState({ filter: event.target.value });
+  };
+
+  filteredContacts = () => {
+    const { contacts, filter } = this.state;
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter?.toLowerCase())
+    );
   };
 
   handleDeleteBtnClick = id => {
     this.setState(prevState => {
-      return {contacts: prevState.contacts.filter(contact => contact.id !== id)};
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== id),
+      };
     });
-  }
+  };
 
-    render() {
-      const { contacts } = this.state;
-
+  render() {
     return (
       <div>
         <Section title="Phonebook">
@@ -49,11 +55,11 @@ export class App extends Component {
         <Filter handelFilter={this.handelFilter} />
         <Section title="Contacts">
           <ContactList
-            contacts={contacts}
+            contacts={this.filteredContacts()}
             handleDeleteBtnClick={this.handleDeleteBtnClick}
           />
         </Section>
       </div>
     );
   }
-    
+}

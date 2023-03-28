@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import style from './Filter.module.css';
 
 export const Filter = ({ handelFilter }) => {
@@ -6,7 +7,7 @@ export const Filter = ({ handelFilter }) => {
       <form className={style.form}>
         <label className={style.label}>Find contact by name</label>
         <input
-          onClick={handelFilter}
+          onChange={handelFilter}
           className={style.input}
           type="text"
           name="name"
@@ -17,4 +18,8 @@ export const Filter = ({ handelFilter }) => {
       </form>
     </>
   );
+};
+
+Filter.propTypes = {
+  handelFilter: PropTypes.func,
 };

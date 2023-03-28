@@ -10,7 +10,11 @@ export const ContactList = ({ contacts, handleDeleteBtnClick }) => {
             <p className={style.contact}>
               {name}:<span className={style.number}>{number}</span>
             </p>
-            <button className={style.btn} type="button" onClick={()=>handleDeleteBtnClick(id)}>
+            <button
+              className={style.btn}
+              type="button"
+              onClick={() => handleDeleteBtnClick(id)}
+            >
               Delete
             </button>
           </li>
@@ -28,4 +32,5 @@ ContactList.propTypes = {
       number: PropTypes.string,
     })
   ),
+  handleDeleteBtnClick: PropTypes.func,
 };
