@@ -1,10 +1,9 @@
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Section } from './Section/Section';
 import { Filter } from './Filter/Filter';
-
 
 export class App extends Component {
   state = {
@@ -15,27 +14,39 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
+  };
+
+  handleAddContact = event => {
+    event.preventDefault();
+    console.dir(event.target[1].value);
+    const name = event.target[0].value;
+    const number = event.target[1].value;
+    this.setState(prevState => {
+      return {
+        contacts: [...prevState.contacts, { name, number, id: nanoid() }]
+      };
+    }
+    );
+
+  handelFilter = ({ target }) => {
+    this.setState({ filter: target.value });
   };
 
   handleDeleteBtnClick = id => {
     this.setState(prevState => {
-      return {
-        contacts: prevState.contacts.filter(contact => contact.id !== id),
-      };
+      return {contacts: prevState.contacts.filter(contact => contact.id !== id)};
     });
-  };
+  }
 
-  render() {
-    const { contacts } = this.state;
+    render() {
+      const { contacts } = this.state;
 
     return (
       <div>
         <Section title="Phonebook">
-          <ContactForm />
+          <ContactForm handleAddContact={this.handleAddContact} />
         </Section>
-        <Filter/>
+        <Filter handelFilter={this.handelFilter} />
         <Section title="Contacts">
           <ContactList
             contacts={contacts}
@@ -45,4 +56,4 @@ export class App extends Component {
       </div>
     );
   }
-}
+    

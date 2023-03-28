@@ -1,8 +1,8 @@
 import style from './ContactForm.module.css';
 
-export const ContactForm = () => {
+export const ContactForm = ({handleAddContact}) => {
   return (
-    <form className={style.form}>
+    <form className={style.form} onSubmit={handleAddContact}>
       <label className={style.label} htmlFor="text">Name</label>
       <input
         className={style.input}
@@ -21,7 +21,7 @@ export const ContactForm = () => {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <button className={style.btn} type="submit">
+      <button className={style.btn} type="submit" >
         Add contact
       </button>
     </form>
