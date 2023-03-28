@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { Component } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
@@ -15,14 +15,27 @@ export class App extends Component {
     name: '',
   };
 
+  handleDeleteBtnClick = id => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== id),
+      };
+    });
+  };
+
   render() {
+    const { contacts } = this.state;
+
     return (
       <div>
         <Section title="Phonebook">
           <ContactForm />
         </Section>
         <Section title="Contacts">
-          <ContactList />
+          <ContactList
+            contacts={contacts}
+            handleDeleteBtnClick={this.handleDeleteBtnClick}
+          />
         </Section>
       </div>
     );

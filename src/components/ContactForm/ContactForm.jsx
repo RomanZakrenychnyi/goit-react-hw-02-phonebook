@@ -3,7 +3,7 @@ import style from './ContactForm.module.css';
 export const ContactForm = () => {
   return (
     <form className={style.form}>
-      <label htmlFor="text">Name</label>
+      <label className={style.label} htmlFor="text">Name</label>
       <input
         className={style.input}
         type="text"
@@ -12,8 +12,9 @@ export const ContactForm = () => {
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
-      <label htmlFor="text">Number</label>
+      <label className={style.label} htmlFor="text">Number</label>
       <input
+        className={style.input}
         type="tel"
         name="number"
         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
